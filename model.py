@@ -2,8 +2,8 @@
 # flask
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
-#from flask.ext.script import Manager
-#from flask.ext.migrate import Migrate, MigrateCommand
+# from flask.ext.script import Manager
+# from flask.ext.migrate import Migrate, MigrateCommand
 
 # sqlalchemy
 from sqlalchemy import Integer, ForeignKey, String, Column, Float
@@ -22,9 +22,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///contests.db"
 db = SQLAlchemy(app)
 
 # set up migration
-#migrate = Migrate(app, db)
-#manager = Manager(app)
-#manager.add_command('contests', MigrateCommand)
+# migrate = Migrate(app, db)
+# manager = Manager(app)
+# manager.add_command('contests', MigrateCommand)
 
 class Contests(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

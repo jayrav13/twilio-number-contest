@@ -46,7 +46,9 @@ def contests():
 				db.session.add(new)
 				resp.message("Winner winner, chicken dinner!")
 
+			# If the guess is incorrect:
 			else:
+				# Send a hit with if the number is smaller or bigger.
 				hint = ""
 				if int(request.form['Body']) > contest.number:
 					hint = "smaller"
@@ -55,18 +57,23 @@ def contests():
 
 				resp.message("Ah, not quite. Try a " + hint + " number!")
 
+			# Add the contestant to SQLite, not a winner yet.
 			db.session.add(contestant)
 
+		# Respond with an error if not a number. Record user w/value -1.
 		else:
 			contestant = Contestants(str(request.form['From']).strip(), -1)
 			contest.contestants.append(contestant)
 			resp.message("Ah - I was expecting a number! Try again!")
 
+	# This should never execute, but in case there are no active, handle.
 	else:
 		resp.message("No contests running - try back in a bit!")
 
+	# Commit everything, respond.
 	db.session.commit()
 	return str(resp)
 
+# Run.
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', debug=True)
+	app.run(host='0.0.0.0')
