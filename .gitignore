@@ -1,0 +1,3 @@
+venv/
+migrations/
+contests.db
